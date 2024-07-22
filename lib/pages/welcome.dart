@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // Import the LoginPage
+import 'login_page.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
@@ -57,7 +57,7 @@ class _WelcomeState extends State<Welcome> {
                   ),
                   SizedBox(height: 16),
                   SizedBox(
-                    width: 250, // Fixed width for the button
+                    width: 250,
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/loginpage');

@@ -12,41 +12,43 @@ class LoginPage extends StatelessWidget {
   // sign user in method
   void signUserIn() {}
 
+  // sign user up method
+  void signUserUp() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 12),
 
                 // logo
-                const Icon(
-                  Icons.lock,
-                  size: 100,
+                Image.asset(
+                  'lib/images/logo_bk.png',
+                  width: 240,
+                  height: 240,
                 ),
 
-                const SizedBox(height: 50),
-
-                // welcome back, you've been missed!
                 Text(
-                  'Welcome back you\'ve been missed!',
+                  'ĐĂNG NHẬP VÀO BKLIB',
                   style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 16,
+                    color: Color(0xFF2C88FF),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 24),
 
                 // username textfield
                 MyTextField(
                   controller: usernameController,
-                  hintText: 'Username',
+                  hintText: 'Tên đăng nhập',
                   obscureText: false,
                 ),
 
@@ -55,24 +57,8 @@ class LoginPage extends StatelessWidget {
                 // password textfield
                 MyTextField(
                   controller: passwordController,
-                  hintText: 'Password',
+                  hintText: 'Mật khẩu',
                   obscureText: true,
-                ),
-
-                const SizedBox(height: 10),
-
-                // forgot password?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
                 ),
 
                 const SizedBox(height: 25),
@@ -80,28 +66,22 @@ class LoginPage extends StatelessWidget {
                 // sign in button
                 MyButton(
                   onTap: signUserIn,
+                  buttonText: 'ĐĂNG NHẬP',
+                  backgroundColor: Color(0xFF2C88FF),
+                  textColor: Colors.white,
+                  borderColor: Color(0xFF2C88FF),
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 10),
 
-                // not a member? register now
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Not a member?',
-                      style: TextStyle(color: Colors.grey[700]),
-                    ),
-                    const SizedBox(width: 4),
-                    const Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                )
+                // sign up button
+                MyButton(
+                  onTap: signUserUp,
+                  buttonText: 'ĐĂNG KÝ',
+                  backgroundColor: Colors.white,
+                  textColor: Color(0xFF2C88FF),
+                  borderColor: Color(0xFF2C88FF),
+                ),
               ],
             ),
           ),
