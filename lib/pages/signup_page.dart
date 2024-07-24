@@ -1,11 +1,11 @@
-// lib/pages/login_page.dart
+// lib/pages/signup_page.dart
 import 'package:flutter/material.dart';
 import 'package:helloworld/components/my_textfield.dart';
 import 'package:helloworld/components/my_button.dart';
 import 'package:helloworld/components/my_function.dart'; // Import the functions
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class SignupPage extends StatelessWidget {
+  SignupPage({super.key});
 
   // text editing controllers
   final usernameController = TextEditingController();
@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 12),
+                const SizedBox(height: 4),
 
                 // logo
                 Image.asset(
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 Text(
-                  'ĐĂNG NHẬP VÀO BKLIB',
+                  'ĐĂNG KÝ TÀI KHOẢN BKLIB',
                   style: TextStyle(
                     color: Color(0xFF2C88FF),
                     fontSize: 20,
@@ -50,10 +50,26 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
+                MyTextField(
+                  controller: usernameController,
+                  hintText: 'Mã số sinh viên',
+                  obscureText: false,
+                ),
+
+                const SizedBox(height: 10),
+
+                MyTextField(
+                  controller: usernameController,
+                  hintText: 'Mật khẩu',
+                  obscureText: false,
+                ),
+
+                const SizedBox(height: 10),
+
                 // password textfield
                 MyTextField(
                   controller: passwordController,
-                  hintText: 'Mật khẩu',
+                  hintText: 'Nhập lại mật khẩu',
                   obscureText: true,
                 ),
 
@@ -62,7 +78,7 @@ class LoginPage extends StatelessWidget {
                 // sign in button
                 MyButton(
                   onTap: () => directMainMenu(context),
-                  buttonText: 'Đăng nhập',
+                  buttonText: 'Đăng ký',
                   backgroundColor: Color(0xFF2C88FF),
                   textColor: Colors.white,
                   borderColor: Color(0xFF2C88FF),
@@ -72,12 +88,14 @@ class LoginPage extends StatelessWidget {
 
                 // sign up button
                 MyButton(
-                  onTap: () => signUserUp(context),
-                  buttonText: 'Chưa có tài khoản? Đăng ký tại đây',
+                  onTap: () => signUserIn(context),
+                  buttonText: 'Đã có tài khoản? Đăng nhập tại đây',
                   backgroundColor: Colors.white,
                   textColor: Color(0xFF2C88FF),
                   borderColor: Color(0xFF2C88FF),
                 ),
+
+                const SizedBox(height: 10)
               ],
             ),
           ),
