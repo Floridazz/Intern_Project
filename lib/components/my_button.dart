@@ -5,7 +5,7 @@ class MyButton extends StatefulWidget {
   final String buttonText;
   final Color backgroundColor;
   final Color textColor;
-  final Color borderColor; // New parameter for border color
+  final Color borderColor;
 
   const MyButton({
     super.key,
@@ -13,7 +13,7 @@ class MyButton extends StatefulWidget {
     required this.buttonText,
     required this.backgroundColor,
     required this.textColor,
-    required this.borderColor, // Require borderColor
+    required this.borderColor,
   });
 
   @override
@@ -55,7 +55,7 @@ class _MyButtonState extends State<MyButton> {
         decoration: BoxDecoration(
           color: isPressed ? widget.backgroundColor.withOpacity(0.8) : widget.backgroundColor,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: widget.borderColor, width: 2), // Add border color
+          border: Border.all(color: widget.borderColor, width: 2),
         ),
         child: Center(
           child: Text(

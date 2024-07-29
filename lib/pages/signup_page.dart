@@ -1,8 +1,7 @@
-// lib/pages/signup_page.dart
 import 'package:flutter/material.dart';
 import 'package:helloworld/components/my_textfield.dart';
 import 'package:helloworld/components/my_button.dart';
-import 'package:helloworld/components/my_function.dart'; // Import the functions
+import 'package:helloworld/components/my_function.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});

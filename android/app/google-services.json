@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "380421220342",
+    "project_id": "library-manage-d1420",
+    "storage_bucket": "library-manage-d1420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380421220342:android:8e21c56b22eefd8e2609d7",
+        "android_client_info": {
+          "package_name": "com.example.helloworld"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo5Wa4OKrTNW-eB7d926gYAo2hEgzjlnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
