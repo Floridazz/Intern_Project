@@ -1,4 +1,3 @@
-// lib/components/my_function.dart
 import 'package:flutter/material.dart';
 
 void signUserUp(BuildContext context) {

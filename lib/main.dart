@@ -1,9 +1,8 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
 import 'pages/welcome.dart';
 import 'pages/login_page.dart';
 import 'pages/signup_page.dart';
-import 'pages/main_menu.dart'; // Import the main menu page
+import 'pages/main_menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,7 +53,7 @@ class MyApp extends StatelessWidget {
               );
             },
           );
-        } else if (settings.name == '/mainmenu') { // Add the main menu route
+        } else if (settings.name == '/mainmenu') {
           return PageRouteBuilder(
             settings: settings,
             pageBuilder: (_, __, ___) => const MainMenu(),

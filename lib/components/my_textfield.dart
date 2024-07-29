@@ -53,7 +53,7 @@ class _MyTextFieldState extends State<MyTextField> {
               ? IconButton(
             icon: Icon(
               _obscureText ? Icons.visibility : Icons.visibility_off,
-              color: Color(0xFF2C88FF), // Set the color here
+              color: Color(0xFF2C88FF),
             ),
             onPressed: _toggleObscureText,
           )

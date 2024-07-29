@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'scan.dart';
 
-// Define the different pages
 class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Page 1')),
+      appBar: AppBar(title: Text('Tổng hợp kiểm kê')),
       body: Center(child: Text('This is Page 1')),
     );
   }
@@ -15,7 +15,7 @@ class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Page 2')),
+      appBar: AppBar(title: Text('Tạo phiên kiểm kê')),
       body: Center(child: Text('This is Page 2')),
     );
   }
@@ -25,7 +25,7 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Page 3')),
+      appBar: AppBar(title: Text('Lịch sử kiểm kê')),
       body: Center(child: Text('This is Page 3')),
     );
   }
@@ -35,7 +35,7 @@ class Page4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Page 4')),
+      appBar: AppBar(title: Text('Báo cáo kiểm kê')),
       body: Center(child: Text('This is Page 4')),
     );
   }
@@ -45,7 +45,7 @@ class Page5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Page 5')),
+      appBar: AppBar(title: Text('Quản lý tài khoản')),
       body: Center(child: Text('This is Page 5')),
     );
   }
@@ -59,144 +59,209 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  bool _isSearching = false;
   final TextEditingController _searchController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-
-  void _toggleSearch() {
-    setState(() {
-      _isSearching = !_isSearching;
-      if (_isSearching) {
-        // Request focus when entering search mode
-        FocusScope.of(context).requestFocus(_focusNode);
-      } else {
-        // Clear the search box when exiting search mode
-        _searchController.clear();
-      }
-    });
-  }
+  final FocusNode _searchFocusNode = FocusNode();
+  int _selectedIndex = 0;
 
   @override
   void dispose() {
     _searchController.dispose();
-    _focusNode.dispose();
+    _searchFocusNode.dispose();
     super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Page1()),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Page2()),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ScanPage()),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Page3()),
+        );
+        break;
+      case 4:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Page4()),
+        );
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_searchFocusNode.hasFocus) {
+        _searchFocusNode.unfocus();
+      }
+    });
+
     return Scaffold(
-      backgroundColor: Color(0xFFEEEEEE), // Set background color
+      backgroundColor: Color(0xFFEEEEEE),
 
       // AppBar configuration
       appBar: AppBar(
-        automaticallyImplyLeading: false, // Removes the back arrow button
-        title: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: _isSearching
-              ? TextField(
-            controller: _searchController,
-            focusNode: _focusNode, // Attach FocusNode
-            decoration: InputDecoration(
-              hintText: 'Search...',
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.all(10),
-            ),
-          )
-              : const Text(
-            '',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        automaticallyImplyLeading: false,
+        title: Container(
+          width: double.infinity,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
           ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(_isSearching ? Icons.close : Icons.search),
-            onPressed: _toggleSearch,
-          ),
-          SizedBox(width: 10), // Add some spacing
-        ],
-        backgroundColor: Colors.blueAccent, // Customize AppBar color if needed
-      ),
-
-      // Main content area
-      body: GridView.builder(
-        padding: EdgeInsets.all(16.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // Number of columns
-          crossAxisSpacing: 16.0, // Space between columns
-          mainAxisSpacing: 16.0, // Space between rows
-          childAspectRatio: 1.5, // Aspect ratio of the boxes
-        ),
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          // Define a list of pages to navigate to
-          final List<Widget> pages = [
-            Page1(),
-            Page2(),
-            Page3(),
-            Page4(),
-            Page5(),
-          ];
-
-          // Define a list of texts for each box
-          final List<String> texts = [
-            'Page 1',
-            'Page 2',
-            'Page 3',
-            'Page 4',
-            'Page 5',
-          ];
-
-          return GestureDetector(
-            onTap: () {
-              // Navigate to the corresponding page
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => pages[index]),
-              );
-            },
-            child: Container(
-              color: Colors.white,
-              child: Center(
-                child: Text(
-                  texts[index],
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          child: Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.search, size: 24),
+                onPressed: () {},
+              ),
+              Expanded(
+                child: TextField(
+                  controller: _searchController,
+                  focusNode: _searchFocusNode,
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    border: InputBorder.none,
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            ],
+          ),
+        ),
+        backgroundColor: Color(0xFFFFEEEEEE),
       ),
 
-      // Bottom navigation bar
+      body: Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: GridView.builder(
+          padding: EdgeInsets.all(16.0),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16.0,
+            mainAxisSpacing: 16.0,
+            childAspectRatio: 1.5,
+          ),
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            final List<Widget> pages = [
+              Page1(),
+              Page2(),
+              Page3(),
+              Page4(),
+              Page5(),
+            ];
+
+            final List<String> texts = [
+              'Tổng hợp kiểm kê',
+              'Tạo phiên kiểm kê',
+              'Lịch sử kiểm kê',
+              'Báo cáo kiểm kê',
+              'Quản lý tài khoản',
+            ];
+
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => pages[index]),
+                );
+              },
+              child: Container(
+                color: Color(0xFFD9D9D9),
+                child: Center(
+                  child: Text(
+                    texts[index],
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+
       bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {
-                // Handle home button press
-              },
+            SizedBox(width: 8),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.data_usage, color: Color(0xFF006FFD), size: 28),
+                    onPressed: () {
+                      _onItemTapped(0);
+                    },
+                  ),
+                  SizedBox(width: 20),
+                  IconButton(
+                    icon: Icon(Icons.account_circle, color: Color(0xFF006FFD), size: 28),
+                    onPressed: () {
+                      _onItemTapped(1);
+                    },
+                  ),
+                ],
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                // Handle search button press
-              },
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: Color(0xFF006FFD),
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                icon: Icon(Icons.qr_code_scanner, color: Colors.white, size: 28),
+                onPressed: () {
+                  _onItemTapped(2);
+                },
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.notifications),
-              onPressed: () {
-                // Handle notifications button press
-              },
+            SizedBox(width: 8),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.notifications, color: Color(0xFF006FFD), size: 28),
+                    onPressed: () {
+                      _onItemTapped(3);
+                    },
+                  ),
+                  SizedBox(width: 20),
+                  IconButton(
+                    icon: Icon(Icons.settings, color: Color(0xFF006FFD), size: 28),
+                    onPressed: () {
+                      _onItemTapped(4);
+                    },
+                  ),
+                ],
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.account_circle),
-              onPressed: () {
-                // Handle account button press
-              },
-            ),
+            SizedBox(width: 8),
           ],
         ),
       ),
