@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'scan.dart';
+import 'account.dart';
 
 class Page1 extends StatelessWidget {
   @override
@@ -84,7 +85,7 @@ class _MainMenuState extends State<MainMenu> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Page2()),
+          MaterialPageRoute(builder: (context) => AccountPage()), // Update here
         );
         break;
       case 2:
@@ -107,6 +108,7 @@ class _MainMenuState extends State<MainMenu> {
         break;
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
