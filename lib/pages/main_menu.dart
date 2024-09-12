@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:helloworld/blocs/sign_in_bloc/sign_in_bloc.dart';
+import '../blocs/authentication_bloc/authentication_bloc.dart';
 import 'scan.dart';
 import 'account.dart';
 
@@ -47,7 +50,14 @@ class Page5 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Quản lý tài khoản')),
-      body: Center(child: Text('This is Page 5')),
+      body: Center(
+          child: TextButton(
+        child: Text('Đăng xuất'),
+        onPressed: () {
+          context.read<SignInBloc>().add(SignOutRequired());
+          Navigator.pop(context);
+        },
+      )),
     );
   }
 }
@@ -109,7 +119,6 @@ class _MainMenuState extends State<MainMenu> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -170,7 +179,12 @@ class _MainMenuState extends State<MainMenu> {
               Page2(),
               Page3(),
               Page4(),
-              Page5(),
+              BlocProvider<SignInBloc>(
+                create: (_) => SignInBloc(
+                    myUserRepository:
+                        context.read<AuthenticationBloc>().userRepository),
+                child: Page5(),
+              ),
             ];
 
             final List<String> texts = [
@@ -213,14 +227,16 @@ class _MainMenuState extends State<MainMenu> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.data_usage, color: Color(0xFF006FFD), size: 28),
+                    icon: Icon(Icons.data_usage,
+                        color: Color(0xFF006FFD), size: 28),
                     onPressed: () {
                       _onItemTapped(0);
                     },
                   ),
                   SizedBox(width: 20),
                   IconButton(
-                    icon: Icon(Icons.account_circle, color: Color(0xFF006FFD), size: 28),
+                    icon: Icon(Icons.account_circle,
+                        color: Color(0xFF006FFD), size: 28),
                     onPressed: () {
                       _onItemTapped(1);
                     },
@@ -236,7 +252,8 @@ class _MainMenuState extends State<MainMenu> {
                 shape: BoxShape.circle,
               ),
               child: IconButton(
-                icon: Icon(Icons.qr_code_scanner, color: Colors.white, size: 28),
+                icon:
+                    Icon(Icons.qr_code_scanner, color: Colors.white, size: 28),
                 onPressed: () {
                   _onItemTapped(2);
                 },
@@ -248,14 +265,16 @@ class _MainMenuState extends State<MainMenu> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.notifications, color: Color(0xFF006FFD), size: 28),
+                    icon: Icon(Icons.notifications,
+                        color: Color(0xFF006FFD), size: 28),
                     onPressed: () {
                       _onItemTapped(3);
                     },
                   ),
                   SizedBox(width: 20),
                   IconButton(
-                    icon: Icon(Icons.settings, color: Color(0xFF006FFD), size: 28),
+                    icon: Icon(Icons.settings,
+                        color: Color(0xFF006FFD), size: 28),
                     onPressed: () {
                       _onItemTapped(4);
                     },

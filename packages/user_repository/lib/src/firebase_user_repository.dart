@@ -15,7 +15,7 @@ class FirebaseUserRepository implements UserRepository {
 
   final FirebaseAuth _firebaseAuth;
   //* reference to "users" collection on database
-  final usersCollection = FirebaseFirestore.instance.collection('user');
+  final usersCollection = FirebaseFirestore.instance.collection('users');
 
   //* Emit current user when the authentication state changes.
   @override

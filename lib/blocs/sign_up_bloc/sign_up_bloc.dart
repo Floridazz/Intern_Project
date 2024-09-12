@@ -21,6 +21,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         MyUser user =
             await _userRepository.signUp(event.myUser, event.password);
         await _userRepository.setUserData(user);
+        print("USER WITH ID: ${user.id} HAS BEEN CREATED");
         emit(SignUpSuccess());
       } catch (e) {
         log(e.toString());
